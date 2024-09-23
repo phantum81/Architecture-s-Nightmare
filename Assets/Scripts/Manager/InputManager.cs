@@ -23,6 +23,20 @@ public class InputManager : MonoBehaviour
         GetInputDir();
     }
 
+
+    public void Init()
+    {
+        if (_inputDic.Count > 0)
+            return;
+        for (int i = 0; i < _inputDic.Count; i++)
+        {
+            _inputDic.Add((EUserAction)i, false);
+        }
+
+    }
+
+    #region 입력검사
+
     private void GetInputDir()
     {
 
@@ -33,17 +47,6 @@ public class InputManager : MonoBehaviour
         z = (_inputDic[EUserAction.MoveForward] ? 1f : 0f) - (_inputDic[EUserAction.MoveBackward] ? 1f : 0f);
 
         _inputDir = new Vector3(x, 0, z);
-
-    }
-
-    public void Init()
-    {
-        if (_inputDic.Count > 0)
-            return;
-        for (int i = 0; i < _inputDic.Count; i++)
-        {
-            _inputDic.Add((EUserAction)i, false);
-        }
 
     }
     private void CheckInputKeys()
@@ -57,4 +60,5 @@ public class InputManager : MonoBehaviour
         _inputDic[EUserAction.Interaction] = Input.GetKeyDown(KeyCode.F);
 
     }
+    #endregion
 }

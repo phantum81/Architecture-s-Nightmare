@@ -13,6 +13,8 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCameraBase CurCamera => _curCamera;
 
     private CinemachineBrain cinemachineBrain;
+    public CinemachineBrain CinemachineBrain => cinemachineBrain;
+
     void Start()
     {
         _curCamera = GetCurCamera();
@@ -22,6 +24,7 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         _curCamera = GetCurCamera();
+        
     }
 
     public void Init()
@@ -36,9 +39,13 @@ public class CameraManager : MonoBehaviour
         if (cinemachineBrain != null)
         {
             CinemachineVirtualCameraBase activeCamera = cinemachineBrain.ActiveVirtualCamera as CinemachineVirtualCameraBase;
+            if (activeCamera == null)
+                return _cameraDic[ECameraType.Fps];
             return activeCamera;
         }
         else
             return null;
     }
+
+    
 }

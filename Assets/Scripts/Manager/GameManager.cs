@@ -124,12 +124,12 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
-        _inputMgr.Init();
-        _cameraMgr.Init();
+        InputMgr.Init();
+        CameraMgr.Init();
+
     }
     void Start()
     {
-        
     }
 
     // Update is called once per frame
