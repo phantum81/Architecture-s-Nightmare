@@ -5,54 +5,68 @@ using UnityEngine;
 public class StepHeightChecker : MonoBehaviour
 {
     [Header("스텝 보정 높이"), SerializeField]
-    public float stepHeight = 0.1f;
-    [Header("단차 올라가는 속도"), SerializeField]
-    public float stepSmoothSpeed = 5f;  // 단차를 올라갈 때의 속도
+    private float stepHeight = 0.1f;
+
     [Header("올라갈 수 있는 높이"), SerializeField]
-    public float limitHeightMultiply = 0.3f;
+    private float limitHeightMultiply = 0.3f;
 
     private LayerMask expectLayer = (1 << 6);
     private RaycastHit hitLower;
+    [Header("보정타임"), SerializeField]
+    private float time = 0.3f;
 
 
-    public void StepHeightMove(Rigidbody _rigd, Vector3 _inputdir)
+    public void StepHeightMove(Rigidbody _rigd,  Vector3 _inputdir)
     {
-        
+
         Vector3 limitHeight = transform.position + Vector3.up * limitHeightMultiply;
-        // 발 높이에서 단차 감지
-        if (Physics.Raycast(transform.position, _inputdir, out hitLower, 0.2f, ~expectLayer))
+        float angle = 0f;
+
+        
+
+        if (Physics.Raycast(transform.position, _inputdir, out hitLower, 0.6f, ~expectLayer) )
         {
-            if (Physics.Raycast(limitHeight, _inputdir, 0.3f, ~expectLayer))
+            
+            angle = Vector3.Angle(Vector3.up, hitLower.normal);
+            
+            if (!Physics.Raycast(limitHeight, _inputdir, 0.7f, ~expectLayer) && angle >=80f)
             {
-                return;
+                _rigd.position -= new Vector3(0f, -stepHeight, 0f);
+
+
             }
 
+        }
+        else
+        {
+            if (hitLower.collider != null)
+            {
 
-            // 단차의 높이를 기준으로 목표 높이 계산
-            float targetHeight = hitLower.point.y + stepHeight;
+            }
 
-            // 자연스럽게 목표 높이로 이동
-            Vector3 targetPosition = new Vector3(_rigd.position.x, Mathf.Lerp(_rigd.position.y, targetHeight, Time.fixedDeltaTime * stepSmoothSpeed), _rigd.position.z);
+                
 
-            // Rigidbody의 위치 업데이트
-            _rigd.MovePosition(targetPosition);
 
         }
+
+
+
+        
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red; 
+        //Gizmos.color = Color.red; 
 
         
-        Gizmos.DrawRay(transform.position, transform.forward * 0.2f);
+        //Gizmos.DrawRay(transform.position, transform.forward * 0.3f);
 
-        Gizmos.color = Color.red; 
+        //Gizmos.color = Color.red; 
 
        
-        Gizmos.DrawRay(transform.position + Vector3.up * limitHeightMultiply, transform.forward * 0.3f);
+        //Gizmos.DrawRay(transform.position + Vector3.up * limitHeightMultiply, transform.forward * 0.4f);
 
-        // Ray가 충돌한 위치에 구를 그림
+        ////Ray가 충돌한 위치에 구를 그림
         //if (hitLower.collider != null)
         //{
         //    Gizmos.color = Color.green;  // 충돌된 위치는 녹색으로 표시

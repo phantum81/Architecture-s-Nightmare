@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어"), SerializeField]
     private Transform player;
     [Header("걷는 속력"), SerializeField]
-    private float walkSpeed = 10f;
+    private float walkSpeed = 5f;
+    [Header("달리는 속력"), SerializeField]
+    private float runSpeed = 10f;
     [Header("공중 속력"), SerializeField]
     private float airSpeed = 2f;
     [Header("점프 힘"), SerializeField]
@@ -27,8 +30,11 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigd;
     private Vector3 inputDir;
+    public Vector3 InputDir => inputDir;
     private CameraManager cameraMgr;
     private InputManager inputMgr;
+
+    public bool isSlope = false;
 
     #region 유니티 실행부
     private void Awake()
@@ -45,21 +51,47 @@ public class PlayerController : MonoBehaviour
     {
         inputDir = InputLocalize(inputMgr.InputDir);
 
-        PlayerSlopeState();
+        isSlope = slopChecker.CheckSlope();
 
-        stepHeightChecker.StepHeightMove(rigd, inputDir);
 
-        if (inputMgr.InputDic[EUserAction.Jump])
-            Jump();
+
+        if (groundChecker.IsGround)
+        {
+            if (inputMgr.InputDic[EUserAction.Jump])
+                Jump();
+
+            if (isSlope)
+            {
+                rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
+                inputDir= slopChecker.AdjustDirectionToSlope(inputDir);
+                rigd.useGravity = false;
+            }
+            else
+            {
+                rigd.useGravity = true;
+                stepHeightChecker.StepHeightMove(rigd, inputDir);
+            }
+            if (inputMgr.InputDic[EUserAction.Run])
+                Move(inputDir, runSpeed);
+            else
+                Move(inputDir, walkSpeed);
+        }
+        else
+            rigd.AddForce(Physics.gravity * (0.3f), ForceMode.Acceleration);
+
+
+
+
 
     }
 
     private void FixedUpdate()
     {
-        if (groundChecker.IsGround)
-            Move(inputDir, walkSpeed);
-        else
-            rigd.AddForce(Physics.gravity * (1.5f), ForceMode.Acceleration);
+        //if (groundChecker.IsGround)
+        //    Move(inputDir, walkSpeed);
+        //else
+        //    rigd.AddForce(Physics.gravity * (1.5f), ForceMode.Acceleration);
+       
 
 
     }
@@ -117,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 cameraForward = cameraMgr.CinemachineBrain.transform.forward;
 
-        // 카메라의 앞 방향 벡터의 Y축 성분을 0으로 설정하여 수평면으로 제한
+        
         cameraForward.y = 0;
         cameraForward.Normalize();
 
@@ -130,21 +162,17 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (groundChecker.IsGround)
-        {
-            rigd.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        }
+        rigd.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     #endregion
     private void PlayerSlopeState()
     {
-        float groundAngle = slopChecker.CalculateGroundAngle(inputDir);
 
-
-        if (groundAngle > 0 && groundChecker.IsGround)
+        if (isSlope)
         {
-            rigd.useGravity = false;
             rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
+            rigd.useGravity = false;
+
         }
         else
             rigd.useGravity = true;
