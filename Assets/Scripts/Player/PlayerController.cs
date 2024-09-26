@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
             if (inputMgr.InputDic[EUserAction.Jump])
                 Jump();
 
+
+
             if (isSlope)
             {
                 rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
@@ -68,8 +70,16 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                rigd.useGravity = true;
                 stepHeightChecker.StepHeightMove(rigd, inputDir);
+                if (stepHeightChecker.IsTask)
+                {
+                    rigd.useGravity = false;
+                    rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
+                }
+                else
+                {
+                    rigd.useGravity = true;
+                }
             }
             if (inputMgr.InputDic[EUserAction.Run])
                 Move(inputDir, runSpeed);
@@ -77,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 Move(inputDir, walkSpeed);
         }
         else
-            rigd.AddForce(Physics.gravity * (0.3f), ForceMode.Acceleration);
+            rigd.AddForce(Physics.gravity * (0.2f), ForceMode.Acceleration);
 
 
 
