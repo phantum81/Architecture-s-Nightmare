@@ -2,13 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EObjectType
-{
 
-}
 public interface IObject
 {
     EObjectType eObjectType { get; set; } 
+}
+public interface IState<T>
+{
+    void OperateEnter(T _obj);
+
+    void OperateUpdate(T _obj);
+
+    void OperateExit(T _obj);
+
+
+}
+
+
+public enum EObjectType
+{
+
 }
 
 public enum EUserAction
@@ -29,3 +42,27 @@ public enum ECameraType
     Fps,
 
 }
+
+public enum TState
+{
+
+}
+
+public enum EPlayerState
+{
+    None,
+    Idle,
+    Walk,
+    Run,
+    Jump,
+
+
+}
+public enum EPlayerGroundState
+{
+    Ground,
+    Slope,
+    Air,
+
+}
+

@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
@@ -8,16 +9,20 @@ public class PlayerController : MonoBehaviour
 {
     [Header("플레이어"), SerializeField]
     private Transform player;
+    public Transform Player => player;
     [Header("걷는 속력"), SerializeField]
     private float walkSpeed = 5f;
+    public float WalkSpeed => walkSpeed;
     [Header("달리는 속력"), SerializeField]
     private float runSpeed = 10f;
+    public float RunSpeed => runSpeed;
     [Header("공중 속력"), SerializeField]
     private float airSpeed = 2f;
     [Header("점프 힘"), SerializeField]
     private float jumpForce = 10f;
+    public float JumpForce => jumpForce;
     [Header("추락 속도"), SerializeField]
-    private float fallSpeedMultiply = 1.2f;
+    private float fallSpeedMultiply = 0.2f;
 
     [Header("슬로프 체커"), SerializeField]
     private SlopChecker slopChecker;
@@ -34,7 +39,11 @@ public class PlayerController : MonoBehaviour
     private CameraManager cameraMgr;
     private InputManager inputMgr;
 
-    public bool isSlope = false;
+    private bool isSlope = false;
+    public bool IsSlope => isSlope;
+    private bool isGround = false;
+    public bool IsGround => isGround;
+
 
     #region 유니티 실행부
     private void Awake()
@@ -46,61 +55,28 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        inputDir = InputLocalize(inputMgr.InputDir);
-
+       
+        isGround = groundChecker.IsGround;
         isSlope = slopChecker.CheckSlope();
 
 
 
-        if (groundChecker.IsGround)
-        {
-            if (inputMgr.InputDic[EUserAction.Jump])
-                Jump();
+        inputDir = InputLocalize(inputMgr.InputDir);
 
+        if(isSlope)
+            inputDir = slopChecker.AdjustDirectionToSlope(inputDir);
 
-
-            if (isSlope)
-            {
-                rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
-                inputDir= slopChecker.AdjustDirectionToSlope(inputDir);
-                rigd.useGravity = false;
-            }
-            else
-            {
-                stepHeightChecker.StepHeightMove(rigd, inputDir);
-                if (stepHeightChecker.IsTask)
-                {
-                    rigd.useGravity = false;
-                    rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
-                }
-                else
-                {
-                    rigd.useGravity = true;
-                }
-            }
-            if (inputMgr.InputDic[EUserAction.Run])
-                Move(inputDir, runSpeed);
-            else
-                Move(inputDir, walkSpeed);
-        }
-        else
-            rigd.AddForce(Physics.gravity * (0.2f), ForceMode.Acceleration);
-
-
-
+       
 
 
     }
 
     private void FixedUpdate()
     {
-        //if (groundChecker.IsGround)
-        //    Move(inputDir, walkSpeed);
-        //else
-        //    rigd.AddForce(Physics.gravity * (1.5f), ForceMode.Acceleration);
+
        
 
 
@@ -170,22 +146,38 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    private void Jump()
+    public void Jump()
     {
         rigd.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     #endregion
-    private void PlayerSlopeState()
+
+
+    #region 리지드바디 설정 관련
+
+    public void AirGravity()
     {
+        rigd.AddForce(Physics.gravity * (fallSpeedMultiply), ForceMode.Acceleration);
+    }
 
-        if (isSlope)
-        {
-            rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
-            rigd.useGravity = false;
+    public void SetGravity(bool _bol)
+    {
+        rigd.useGravity = _bol;
+    }
 
-        }
-        else
-            rigd.useGravity = true;
+    public void InitRigidbodyVelocity()
+    {
+        rigd.velocity = Vector3.zero;
+    }
+    #endregion
 
+
+    public void SetInputDir(Vector3 _inputDir)
+    {
+        inputDir = _inputDir;
+    }
+    public void StepHeightMove()
+    {
+        stepHeightChecker.StepHeightMove(rigd, inputDir);
     }
 }
