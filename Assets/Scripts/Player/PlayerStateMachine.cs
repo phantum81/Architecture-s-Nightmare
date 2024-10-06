@@ -27,13 +27,15 @@ public class PlayerStateMachine : MonoBehaviour
     {
         StateUpdate();
 
-        if (inputMgr.InputDic[EUserAction.Jump])
-            ChangeState(EPlayerState.Jump);
+
 
 
         if (playerCtr.IsGround)
         {
-            if(playerCtr.IsSlope)
+            if (inputMgr.InputDic[EUserAction.Jump])
+                ChangeState(EPlayerState.Jump);
+
+            if (playerCtr.IsSlope)
                 ChangeState(EPlayerGroundState.Slope);
             else
                 ChangeState(EPlayerGroundState.Ground);

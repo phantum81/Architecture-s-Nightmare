@@ -18,10 +18,20 @@ public interface IState<T>
 
 }
 
+public interface IInteraction
+{
+
+    void OnInteraction();
+
+    EInteractionType GetInteractionType();
+
+    
+}
+
 
 public enum EObjectType
 {
-
+    WineBottle,
 }
 
 public enum EUserAction
@@ -65,4 +75,20 @@ public enum EPlayerGroundState
     Air,
 
 }
+
+public enum EItemType
+{
+    WineBottle,
+
+}
+
+public enum EInteractionType
+{
+    Pick,
+    Push,
+    Destroy,
+    Look,
+
+}
+
 

@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class StepHeightChecker : MonoBehaviour
 {
-    [SerializeField]
+    [Header("현재 설정높이"), SerializeField]
     private float stepHeight = 0.1f;
 
     [Header("올라갈 수 있는 높이"), SerializeField]
@@ -104,14 +104,14 @@ public class StepHeightChecker : MonoBehaviour
 
                 if (Physics.Raycast(rayPos, inputDir, lowRayDistance , ~expectLayer))
                 {
-                    checkHeight += 0.02f;
+                    checkHeight += 0.01f;
 
                 }
                 else
                 {
                     isTask = false;
 
-                    return checkHeight;
+                    return checkHeight + 0.01f;
 
 
 
