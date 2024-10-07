@@ -53,7 +53,8 @@ public class ResourceManager : MonoBehaviour
 
         foreach (var obj in objList)
         {
-            EObjectType type = obj.eObjectType; // EobjectType 가져오기
+            EObjectType type = obj.GetObjectType(); // EobjectType 가져오기
+            obj.Init(); //초기화도 진행
             Transform transform = (obj as Transform).transform; // Transform 가져오기
 
             // Dictionary에 추가
@@ -82,4 +83,6 @@ public class ResourceManager : MonoBehaviour
 
         return foundObjects;
     }
+
+
 }

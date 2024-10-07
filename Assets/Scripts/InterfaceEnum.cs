@@ -5,7 +5,8 @@ using UnityEngine;
 
 public interface IObject
 {
-    EObjectType eObjectType { get; set; } 
+    void Init();
+    EObjectType GetObjectType();
 }
 public interface IState<T>
 {
@@ -27,6 +28,10 @@ public interface IInteraction
 
     
 }
+
+
+
+
 
 
 public enum EObjectType
@@ -53,8 +58,10 @@ public enum ECameraType
 
 }
 
-public enum TState
+public enum EEventType
 {
+    OnInteraction,
+    OffInteraction,
 
 }
 

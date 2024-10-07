@@ -15,6 +15,7 @@ public class PlayerRun<T> : IState<T> where T : class
         if (_send is PlayerController playerCtr)
         {
             playerCtr.Move(playerCtr.InputDir, playerCtr.RunSpeed);
+            playerCtr.Rotate();
             playerCtr.StepHeightMove();
         }
     }

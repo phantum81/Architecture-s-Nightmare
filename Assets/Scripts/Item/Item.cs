@@ -1,21 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IObject, IInteraction
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("오브젝트 타입"), SerializeField]
+    protected EObjectType eObjectType;
+
+    protected SphereCollider interactionCollider;
+    public virtual EObjectType GetObjectType()
     {
-        
+        return eObjectType;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Init()
     {
         
+        interactionCollider = transform.GetChild(0).GetComponent<SphereCollider>();
     }
 
 
+
+
+    public virtual void OnInteraction()
+    {
+       
+    }
+
+    public virtual EInteractionType GetInteractionType()
+    {
+        return EInteractionType.Look;
+    }
 
 }

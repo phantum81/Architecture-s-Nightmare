@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         _inputDir.y = fallSpeed;
 
         rigd.velocity = _inputDir;
-        Rotate();
+       
 
     }
 
