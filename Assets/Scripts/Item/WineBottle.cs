@@ -9,7 +9,10 @@ public class WineBottle : Item
     {
         return base.GetObjectType();
     }
-
+    public override Transform GetTransform()
+    {
+        return base.GetTransform();
+    }
     public override void Init()
     {
         base.Init();
@@ -17,8 +20,12 @@ public class WineBottle : Item
     }
     public override void OnInteraction()
     {
+        gameObject.transform.position = new Vector3(100f, 100f, 100f);
         
-        Debug.Log("¾å»ß");
+        EventBus.TriggerEventAction(EEventType.TutorialCinema, eObjectType);
+        EventBus.TriggerEventAction(EEventType.TutorialCinema);
+
+
     }
 
 

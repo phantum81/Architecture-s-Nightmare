@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FpsCamera
   - Interaction
+  - TutorialCamera
   layers:
   - Default
   - TransparentFX

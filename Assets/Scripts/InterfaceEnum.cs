@@ -7,6 +7,8 @@ public interface IObject
 {
     void Init();
     EObjectType GetObjectType();
+
+    Transform GetTransform();
 }
 public interface IState<T>
 {
@@ -23,7 +25,8 @@ public interface IInteraction
 {
 
     void OnInteraction();
-
+    
+    
     EInteractionType GetInteractionType();
 
     
@@ -37,6 +40,7 @@ public interface IInteraction
 public enum EObjectType
 {
     WineBottle,
+    HuinDung,
 }
 
 public enum EUserAction
@@ -55,6 +59,7 @@ public enum EUserAction
 public enum ECameraType
 {
     Fps,
+    TutorialCam,
 
 }
 
@@ -62,6 +67,8 @@ public enum EEventType
 {
     OnInteraction,
     OffInteraction,
+    TutorialCinema,
+
 
 }
 

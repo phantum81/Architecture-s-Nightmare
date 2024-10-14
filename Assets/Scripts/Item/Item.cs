@@ -20,6 +20,10 @@ public class Item : MonoBehaviour, IObject, IInteraction
         interactionCollider = transform.GetChild(0).GetComponent<SphereCollider>();
     }
 
+    public virtual Transform GetTransform()
+    {
+        return transform;
+    }
 
 
 
@@ -32,5 +36,7 @@ public class Item : MonoBehaviour, IObject, IInteraction
     {
         return EInteractionType.Look;
     }
+
+  
 
 }

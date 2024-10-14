@@ -55,7 +55,8 @@ public class ResourceManager : MonoBehaviour
         {
             EObjectType type = obj.GetObjectType(); // EobjectType 가져오기
             obj.Init(); //초기화도 진행
-            Transform transform = (obj as Transform).transform; // Transform 가져오기
+            
+            Transform transform = obj.GetTransform(); // Transform 가져오기
 
             // Dictionary에 추가
             if (!_objectDic.ContainsKey(type))

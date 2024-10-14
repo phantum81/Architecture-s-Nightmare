@@ -35,7 +35,7 @@ public class UiInteractionShower : MonoBehaviour
     {
         EventBus.SubscribeAction(EEventType.OnInteraction,OnInteraction);
         EventBus.SubscribeAction(EEventType.OffInteraction,OffInteraction);
-        EventBus.SubscribeAction<EInteractionType>(EEventType.OnInteraction, InteractionTextChange);
+        EventBus.SubscribeAction <EInteractionType>(EEventType.OnInteraction, InteractionTextChange);
     }
     private void OnInteraction()
     {
@@ -47,29 +47,24 @@ public class UiInteractionShower : MonoBehaviour
         interactionPanel.SetActive(false);
     }
 
-    private void InteractionTextChange(EInteractionType[] _type)
+    private void InteractionTextChange(EInteractionType _type)
     {
 
         string maintain = string.Empty;
-        if (_type.Length > 0)
+        switch (_type)
         {
-            EInteractionType interactionType = _type[0]; // 첫 번째 매개변수를 사용
-
-            switch (interactionType)
-            {
-                case EInteractionType.Pick:
-                    maintain = ConstBundle.INTERACTION_PICK;
-                    break;
-                case EInteractionType.Push:
-                    maintain = ConstBundle.INTERACTION_PUSH;
-                    break;
-                case EInteractionType.Look:
-                    maintain = ConstBundle.INTERACTION_LOOK;
-                    break;
-                case EInteractionType.Destroy:
-                    maintain = ConstBundle.INTERACTION_DESTROY;
-                    break;
-            }
+            case EInteractionType.Pick:
+                maintain = ConstBundle.INTERACTION_PICK;
+                break;
+            case EInteractionType.Push:
+                maintain = ConstBundle.INTERACTION_PUSH;
+                break;
+            case EInteractionType.Look:
+                maintain = ConstBundle.INTERACTION_LOOK;
+                break;
+            case EInteractionType.Destroy:
+                maintain = ConstBundle.INTERACTION_DESTROY;
+                break;
         }
         interactionText.text = maintain; // UI 업데이트
     }

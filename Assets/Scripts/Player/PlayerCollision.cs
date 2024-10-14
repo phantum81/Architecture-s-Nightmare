@@ -69,7 +69,7 @@ public class PlayerCollision : MonoBehaviour
     {
         IInteraction obj = _col.transform.parent.GetComponent<IInteraction>();
         bool isInteracting = false;
-        float checkInterval = 0.2f;
+        
         if (obj != null)
         {
             
@@ -103,7 +103,7 @@ public class PlayerCollision : MonoBehaviour
                 }
 
 
-                yield return new WaitForSeconds(checkInterval);
+                yield return null;
             }
         }
 
