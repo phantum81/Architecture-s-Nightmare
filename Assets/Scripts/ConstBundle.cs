@@ -19,5 +19,6 @@ public class ConstBundle
     public const string INTERACTION_LOOK = "F:보다";
     public const string INTERACTION_OPEN = "F:열다";
     public const string INTERACTION_DESTROY = "F:부수다";
+    public const string INTERACTION_SIT = "F:앉다";
     public const string INTERACTION_PUSH = "F:밀다";
 }

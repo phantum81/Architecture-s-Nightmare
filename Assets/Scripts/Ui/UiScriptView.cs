@@ -27,7 +27,7 @@ public class UiScriptView : MonoBehaviour, IScriptView
     {
         
     }
-
+    #region 인터페이스함수
     public void WriteScript(string _script)
     {
         scriptTxt.text = _script;
@@ -48,6 +48,18 @@ public class UiScriptView : MonoBehaviour, IScriptView
         if(curCoroutine == null)
             curCoroutine = StartCoroutine(UiManager.Instance.SetUiInvisible(scriptPanel.transform, _time, _wait));
     }
+    #endregion
+
+
+
+    #region 시네마 대사 타임라인 시그널용 함수
+    public void CinemaStudioToFirstMapScripts ()
+    {
+        present.CinemaScripts(EPlayerScriptsType.StudioToFirstMap);
+    }
+
+    #endregion
+
 
     private void OnEnable()
     {

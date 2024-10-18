@@ -46,8 +46,8 @@ public class ResourceManager : MonoBehaviour
 
         foreach (var obj in objList)
         {
-            EObjectType type = obj.GetObjectType(); // EobjectType 가져오기
             obj.Init(); //초기화도 진행
+            EObjectType type = obj.GetObjectType(); // EobjectType 가져오기
             
             Transform transform = obj.GetTransform(); // Transform 가져오기
 

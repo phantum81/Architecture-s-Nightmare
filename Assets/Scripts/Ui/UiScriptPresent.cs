@@ -12,7 +12,8 @@ public class UiScriptPresent
     {
         scriptView = _scriptView;
         data = ResourceManager.Instance.PlayerScriptsData;
-        data.Init();
+        if (data.PlayerScriptsDic.Count == 0 )
+            data.Init();
     }
 
 
@@ -51,5 +52,12 @@ public class UiScriptPresent
     {
         scriptView.SetScriptPanel(false);
     }
+
+
+    public void CinemaScripts(EPlayerScriptsType _type)
+    {
+        scriptView.WriteScript(data.PlayerScriptsDic[_type]);
+    }
+
 
 }

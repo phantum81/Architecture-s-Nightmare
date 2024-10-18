@@ -6420,8 +6420,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1169145267}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &986938934
 MonoBehaviour:
@@ -7396,7 +7396,6 @@ Transform:
   m_Children:
   - {fileID: 1179318229}
   - {fileID: 556284629}
-  - {fileID: 986938933}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

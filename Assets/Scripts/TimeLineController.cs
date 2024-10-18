@@ -17,12 +17,16 @@ public class TimeLineController : MonoBehaviour
     {
         EventBus.SubscribeAction(EEventType.TutorialCinema, PlayTutorial);
         EventBus.SubscribeAction(EEventType.FirstMapCinema, PlayFirstMap);
+        EventBus.SubscribeAction<EObjectType>(EEventType.StudioToAnotherScene, PlayStudioToAnotherScene);
+
     }
 
     private void OnDisable()
     {
         EventBus.UnsubscribeAction(EEventType.TutorialCinema, PlayTutorial);
         EventBus.UnsubscribeAction(EEventType.FirstMapCinema, PlayFirstMap);
+        EventBus.UnsubscribeAction<EObjectType>(EEventType.StudioToAnotherScene, PlayStudioToAnotherScene);
+
     }
 
 
@@ -34,6 +38,17 @@ public class TimeLineController : MonoBehaviour
     private void PlayFirstMap()
     {
         firstMapDirecter.Play();
+    }
+
+    private void PlayStudioToAnotherScene(EObjectType _type)
+    {
+        switch (_type)
+        {
+            case EObjectType.SleepChair:
+                hubToFirstMapDirecter.Play();
+                break;
+        }
+        
     }
 
 

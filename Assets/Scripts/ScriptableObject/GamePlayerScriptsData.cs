@@ -19,6 +19,7 @@ public class GamePlayerScriptsData: ScriptableObject
 
     public void Init()
     {
+        
         for(int i=0; i<scriptsEntries.Count; i++)
         {
             _playerScriptsDic.Add(scriptsEntries[i].key, scriptsEntries[i].sentences);

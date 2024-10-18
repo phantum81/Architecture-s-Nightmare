@@ -11,6 +11,13 @@ public class StudioMapController : MonoBehaviour
     private PlayableDirector firstMapDirecter;
     [Header("¹Ì´Ï¸Ø¸Ê ½Ã³×¸¶"), SerializeField]
     private PlayableDirector MimMapDirecter;
+
+    [Header("Ã¹Â°¸Ê ¹°°Ç"), SerializeField]
+    private GameObject firstMapObject;
+    [Header("¹Ì´Ï¸Ø¸Ê ¹°°Ç"), SerializeField]
+    private GameObject minMapObject;
+    [Header("¸Æ½º¸Ê ¹°°Ç"), SerializeField]
+    private GameObject maxMapObject;
     private void Start()
     {
 
@@ -22,12 +29,16 @@ public class StudioMapController : MonoBehaviour
         {
             case EGameStage.Tutorial:
                 tutorialDirecter.Play();
+
                 break;
             case EGameStage.FirstMap:
                 firstMapDirecter.Play();
+                firstMapObject.SetActive(true);
                 break;
             case EGameStage.MinMap:
                 MimMapDirecter.Play();
+                firstMapObject.SetActive(true);
+                minMapObject.SetActive(true);
                 break;
             case EGameStage.MaxMap:
 

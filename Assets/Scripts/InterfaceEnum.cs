@@ -59,6 +59,7 @@ public enum EObjectType
     HuinDung,
     Saboa,
     ExitDoor,
+    SleepChair,
 
 }
 
@@ -91,6 +92,7 @@ public enum EEventType
     TutorialCinema,
     FirstMapCinema,
     StudioDecoInteraction,
+    StudioToAnotherScene,
 
 }
 
@@ -126,6 +128,7 @@ public enum EInteractionType
     Open,
     Destroy,
     Look,
+    Sit,
 
 }
 
@@ -148,5 +151,6 @@ public enum EPlayerScriptsType
     StudioInteractionWineBottle,
     StudioInteractionHuindung,
     StudioInteractionSaboa,
+    StudioToFirstMap,
 }
 
