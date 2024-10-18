@@ -18,14 +18,6 @@ public class CameraManager : MonoBehaviour
     private CinemachineBrain cinemachineBrain;
     public CinemachineBrain CinemachineBrain => cinemachineBrain;
 
-    private void OnEnable()
-    {
-        
-    }
-    private void OnDisable()
-    {
-        
-    }
 
 
 
@@ -47,9 +39,9 @@ public class CameraManager : MonoBehaviour
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         CinemachineVirtualCameraBase fpsCam = GameObject.FindGameObjectWithTag(ConstBundle.FPS_CAMERA_TAG).GetComponent<CinemachineVirtualCameraBase>();
-        CinemachineVirtualCameraBase tutorialCam = GameObject.FindGameObjectWithTag(ConstBundle.TUTORIAL_CAMERA_TAG).GetComponent<CinemachineVirtualCameraBase>();
+        
         _cameraDic.Add(ECameraType.Fps, fpsCam);
-        _cameraDic.Add(ECameraType.TutorialCam, tutorialCam);
+        
     }
 
     public CinemachineVirtualCameraBase GetCurCamera()

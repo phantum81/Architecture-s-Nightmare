@@ -20,11 +20,10 @@ public class WineBottle : Item
     }
     public override void OnInteraction()
     {
-        gameObject.transform.position = new Vector3(100f, 100f, 100f);
-        
+
+
         EventBus.TriggerEventAction(EEventType.TutorialCinema, eObjectType);
         EventBus.TriggerEventAction(EEventType.TutorialCinema);
-
 
     }
 

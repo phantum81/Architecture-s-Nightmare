@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     public Dictionary<EUserAction, bool> InputDic => _inputDic;
     void Start()
     {
-        CheckInputKeys();
+        
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class InputManager : MonoBehaviour
         _inputDir = new Vector3(x, 0, z);
 
     }
-    private void CheckInputKeys()
+    public void CheckInputKeys()
     {
         _inputDic[EUserAction.MoveForward] = Input.GetKey(KeyCode.W);
         _inputDic[EUserAction.MoveBackward] = Input.GetKey(KeyCode.S);

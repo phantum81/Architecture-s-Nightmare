@@ -27,7 +27,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         StateUpdate();
 
-
+        
 
 
         if (playerCtr.IsGround)

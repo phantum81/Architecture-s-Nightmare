@@ -62,11 +62,14 @@ public class UiInteractionShower : MonoBehaviour
             case EInteractionType.Look:
                 maintain = ConstBundle.INTERACTION_LOOK;
                 break;
+            case EInteractionType.Open:
+                maintain = ConstBundle.INTERACTION_OPEN;
+                break;
             case EInteractionType.Destroy:
                 maintain = ConstBundle.INTERACTION_DESTROY;
                 break;
         }
-        interactionText.text = maintain; // UI 업데이트
+        interactionText.text = maintain; 
     }
 
 }

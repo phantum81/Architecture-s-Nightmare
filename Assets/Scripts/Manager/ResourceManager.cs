@@ -30,24 +30,17 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<EObjectType, Transform> _objectDic = new Dictionary<EObjectType, Transform>();
     public Dictionary<EObjectType, Transform> ObjectDic => _objectDic;
 
+    [Header("플레이어 대사 데이터"), SerializeField]
+    private GamePlayerScriptsData _playerScriptsData;
+    public GamePlayerScriptsData PlayerScriptsData => _playerScriptsData;
 
-    private void Awake()
+
+    public void ResetDictionary()
     {
-        LoadObjectDictionary();
+        _objectDic.Clear();
     }
 
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
-
-    private void LoadObjectDictionary()
+    public void LoadObjectDictionary()
     {
         List<IObject> objList = FindAllObjectsImplementingInterface<IObject>();
 
@@ -69,6 +62,7 @@ public class ResourceManager : MonoBehaviour
             }
         }
     }
+
     private List<T> FindAllObjectsImplementingInterface<T>() where T : class
     {
         List<T> foundObjects = new List<T>();

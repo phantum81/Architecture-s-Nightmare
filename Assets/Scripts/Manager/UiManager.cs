@@ -1,12 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    
+    private static UiManager _instance;
+    public static UiManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject _go = GameObject.Find("UiManager");
+                if (_go == null)
+                {
+                    _instance = _go.AddComponent<UiManager>();
+
+                }
+                if (_instance == null)
+                {
+                    _instance = _go.GetComponent<UiManager>();
+                }
+            }
+            return _instance;
+
+        }
+    }
     void Start()
     {
         
@@ -43,7 +65,7 @@ public class UiManager : MonoBehaviour
         }
 
         // 투명도를 서서히 줄이면서 UI를 투명하게 만듦
-        while (curAlpha > 0f)
+        while (curAlpha > 0f )
         {
             curAlpha -= Time.deltaTime / _time; // _time 동안에 투명도를 줄임
             curColor.a = curAlpha; // 컬러의 알파 채널을 갱신

@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public interface IScriptView
+{
+    void WriteScript(string _script);
+
+    void SetScriptPanel(bool _bol);
+
+    void InvisibleScriptsPanel(float _time, float _wait);
+
+    bool GetScriptPanelActiveSelf();
+
+}
+
+
+
 public interface IObject
 {
     void Init();
@@ -40,7 +54,12 @@ public interface IInteraction
 public enum EObjectType
 {
     WineBottle,
+    DecoWinebBottle,
+    DecoHuinDung,
     HuinDung,
+    Saboa,
+    ExitDoor,
+
 }
 
 public enum EUserAction
@@ -65,10 +84,13 @@ public enum ECameraType
 
 public enum EEventType
 {
+    SceneStart,
     OnInteraction,
     OffInteraction,
+    StudioEnter,
     TutorialCinema,
-
+    FirstMapCinema,
+    StudioDecoInteraction,
 
 }
 
@@ -94,15 +116,37 @@ public enum EItemType
 {
     WineBottle,
 
+
 }
 
 public enum EInteractionType
 {
     Pick,
     Push,
+    Open,
     Destroy,
     Look,
 
 }
 
+public enum EGameStage
+{
+    Tutorial,
+    FirstMap,
+    MinMap,
+    MaxMap,
+
+}
+
+
+
+/// <summary>
+/// 작명법 장소+상황+대상
+/// </summary>
+public enum EPlayerScriptsType
+{
+    StudioInteractionWineBottle,
+    StudioInteractionHuindung,
+    StudioInteractionSaboa,
+}
 

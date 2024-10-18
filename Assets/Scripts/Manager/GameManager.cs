@@ -123,11 +123,40 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    private ScenesManager _scnensMgr;
+    public ScenesManager ScnensMgr
+    {
+        get
+        {
+            if (_scnensMgr == null)
+            {
+                GameObject _go = GameObject.Find("SceneManager");
+                if (_go == null)
+                {
+                    _go = new GameObject("SceneManager");
+                    _scnensMgr = _go.AddComponent<ScenesManager>();
+
+                }
+                if (_scnensMgr == null)
+                {
+                    _scnensMgr = _go.GetComponent<ScenesManager>();
+                }
+            }
+            return _scnensMgr;
+
+        }
+    }
+
+    private EGameStage _eGameStage = EGameStage.Tutorial;
+    public EGameStage EgameStage => _eGameStage;
+
     private void Awake()
     {
         InputMgr.Init();
         CameraMgr.Init();
-
+        ResourceManager.Instance.LoadObjectDictionary();
+        InputMgr.CheckInputKeys();
     }
     void Start()
     {
@@ -139,4 +168,32 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    public void SceneStart()
+    {
+        
+        ResourceManager.Instance.ResetDictionary();
+        ResourceManager.Instance.LoadObjectDictionary();
+    }
+
+    public void SetGameStage()
+    {
+        switch (_eGameStage)
+        {
+            case EGameStage.Tutorial:
+                _eGameStage = EGameStage.FirstMap;
+                break;
+            case EGameStage.FirstMap:
+                _eGameStage = EGameStage.FirstMap;
+                break;
+            case EGameStage.MinMap:
+                _eGameStage = EGameStage.MaxMap;
+                break;
+            case EGameStage.MaxMap:
+
+                break;
+            default:
+                break;
+        }
+    }
+    
 }

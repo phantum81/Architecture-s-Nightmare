@@ -10,9 +10,11 @@ public class PlayerCollision : MonoBehaviour
     Vector3 dir = Vector3.zero;
     private InputManager inputMgr;
     private Coroutine curCoroutine;
+    private CameraManager cameraMgr;
     private void Start()
     {
         inputMgr = GameManager.Instance.InputMgr;
+        cameraMgr = GameManager.Instance.CameraMgr;
     }
 
 
@@ -69,15 +71,18 @@ public class PlayerCollision : MonoBehaviour
     {
         IInteraction obj = _col.transform.parent.GetComponent<IInteraction>();
         bool isInteracting = false;
-        
+        Camera curCam = cameraMgr.CinemachineBrain.OutputCamera;
         if (obj != null)
         {
             
             while (true)
             {
-                float angle = Vector3.Angle(transform.forward, _col.transform.position - transform.position);
+                
+                float angle = Vector3.Angle(transform.forward, _col.transform.parent.position - transform.position);
+                Vector3 screenPoint = curCam.WorldToViewportPoint(_col.transform.parent.position);
+                bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
-                if (angle < 40f)
+                if (isIn)
                 {
                     
                     if (!isInteracting)
