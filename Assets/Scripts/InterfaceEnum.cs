@@ -60,6 +60,7 @@ public enum EObjectType
     Saboa,
     ExitDoor,
     SleepChair,
+    SleepLapTop,
 
 }
 
@@ -152,5 +153,6 @@ public enum EPlayerScriptsType
     StudioInteractionHuindung,
     StudioInteractionSaboa,
     StudioToFirstMap,
+    StudioToMimMap,
 }
 

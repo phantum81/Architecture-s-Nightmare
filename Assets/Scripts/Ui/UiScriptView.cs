@@ -58,6 +58,12 @@ public class UiScriptView : MonoBehaviour, IScriptView
         present.CinemaScripts(EPlayerScriptsType.StudioToFirstMap);
     }
 
+    public void CinemaStudioToMimMapScripts()
+    {
+        present.CinemaScripts(EPlayerScriptsType.StudioToMimMap);
+    }
+
+
     #endregion
 
 

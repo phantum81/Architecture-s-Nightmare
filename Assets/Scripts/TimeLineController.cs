@@ -11,8 +11,10 @@ public class TimeLineController : MonoBehaviour
     private PlayableDirector firstMapDirecter;
     [Header("스튜디오에서 첫째맵 시네마"), SerializeField]
     private PlayableDirector hubToFirstMapDirecter;
-    [Header("스튜디오에서 작아지는 방 시네마"), SerializeField]
+    [Header("스튜디오에서 내가 작아지는 방 시네마"), SerializeField]
     private PlayableDirector hubToMinMapDirecter;
+    [Header("스튜디오에서 내가 커지는 방 시네마"), SerializeField]
+    private PlayableDirector hubToMaxMapDirecter;
     private void OnEnable()
     {
         EventBus.SubscribeAction(EEventType.TutorialCinema, PlayTutorial);
@@ -47,6 +49,10 @@ public class TimeLineController : MonoBehaviour
             case EObjectType.SleepChair:
                 hubToFirstMapDirecter.Play();
                 break;
+            case EObjectType.SleepLapTop:
+                hubToMinMapDirecter.Play();
+                break;
+
         }
         
     }
