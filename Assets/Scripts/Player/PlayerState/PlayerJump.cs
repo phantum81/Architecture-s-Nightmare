@@ -8,6 +8,7 @@ public class PlayerJump<T> : IState<T> where T : class
     {
         if(_send is PlayerController playerCtr)
         {
+            playerCtr.InitRigidbodyVelocity();
             playerCtr.Jump();
         }
 

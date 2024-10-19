@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => runSpeed;
     [Header("공중 속력"), SerializeField]
     private float airSpeed = 2f;
+    public float AirSpeed => airSpeed;
     [Header("점프 힘"), SerializeField]
     private float jumpForce = 10f;
     public float JumpForce => jumpForce;
@@ -121,13 +122,18 @@ public class PlayerController : MonoBehaviour
 
     public void JumpMove(Vector3 _inputDir, float _speed)
     {
-
+        
         Vector3 horizontalForce = _inputDir.normalized * _speed;
 
         rigd.AddForce(horizontalForce, ForceMode.Force);
 
-        
-        Rotate();
+       
+        Vector3 velocity = rigd.velocity;
+        if (velocity.magnitude > runSpeed)
+        {
+            rigd.velocity = velocity.normalized * runSpeed;
+        }
+
     }
 
     public void Rotate() 
@@ -148,7 +154,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump()
     {
-        rigd.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        
+        rigd.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
     #endregion
 
