@@ -86,6 +86,7 @@ public class MiniGameController : MonoBehaviour
                 if (inputMgr.InputDic[EUserAction.Click])
                 {
                     targetList.Add(target);
+                    _objList[0].gameObject.layer = 0;
                     _objList.Remove(_objList[0]);
                 }
 
@@ -115,6 +116,7 @@ public class MiniGameController : MonoBehaviour
 
             for (int i = 0; i < changeItFirstObj.Count; i++)
             {
+                changeItFirstObj[i].gameObject.layer = 2;
                 changeItFirstObj[i].position = originFirstPos[i];
                 changeItFirstObj[i].rotation = originFirstRotate;
             }

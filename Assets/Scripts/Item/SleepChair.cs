@@ -16,10 +16,12 @@ public class SleepChair : Item
     {
         base.Init();
         eObjectType = EObjectType.SleepChair;
+        
     }
     public override void OnInteraction()
     {
         EventBus.TriggerEventAction(EEventType.StudioToAnotherScene, eObjectType);
+        
         interactionCollider.enabled= false;
     }
 

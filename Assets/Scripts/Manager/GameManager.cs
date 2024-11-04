@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
 
         _eGameState = EGameState.Playing;
         InputMgr.Init();
-        //CameraMgr.Init();
+        CameraMgr.Init();
         ResourceManager.Instance.LoadObjectDictionary();
         InputMgr.CheckInputKeys();
     }
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
                 _eGameStage = EGameStage.FirstMap;
                 break;
             case EGameStage.FirstMap:
-                _eGameStage = EGameStage.FirstMap;
+                _eGameStage = EGameStage.MinMap;
                 break;
             case EGameStage.MinMap:
                 _eGameStage = EGameStage.MaxMap;

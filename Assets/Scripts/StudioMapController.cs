@@ -18,21 +18,28 @@ public class StudioMapController : MonoBehaviour
     private GameObject minMapObject;
     [Header("¸Æ½º¸Ê ¹°°Ç"), SerializeField]
     private GameObject maxMapObject;
+
+
     private void Start()
     {
 
     }
+
     private void PlayTimeLineAsset(EGameStage _stage)
     {
+        Transform chair = ResourceManager.Instance.ObjectDic[EObjectType.SleepChair][0];
+        Transform laptop = ResourceManager.Instance.ObjectDic[EObjectType.SleepLapTop][0];
+
         
         switch (_stage)
         {
             case EGameStage.Tutorial:
                 tutorialDirecter.Play();
-
+                
                 break;
             case EGameStage.FirstMap:
                 firstMapDirecter.Play();
+                
                 firstMapObject.SetActive(true);
                 break;
             case EGameStage.MinMap:
