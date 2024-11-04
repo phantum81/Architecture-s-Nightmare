@@ -151,16 +151,35 @@ public class GameManager : MonoBehaviour
     private EGameStage _eGameStage = EGameStage.Tutorial;
     public EGameStage EgameStage => _eGameStage;
 
+    private EGameState _eGameState = EGameState.None;
+
+    public EGameState EgameState => _eGameState;
+
+
+
     private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _eGameState = EGameState.Playing;
         InputMgr.Init();
-        CameraMgr.Init();
+        //CameraMgr.Init();
         ResourceManager.Instance.LoadObjectDictionary();
         InputMgr.CheckInputKeys();
     }
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -170,7 +189,7 @@ public class GameManager : MonoBehaviour
     }
     public void SceneStart()
     {
-        
+        CameraMgr.Init();
         ResourceManager.Instance.ResetDictionary();
         ResourceManager.Instance.LoadObjectDictionary();
     }
@@ -196,4 +215,8 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public void SetGameState(EGameState _state)
+    {
+        _eGameState = _state;
+    }
 }

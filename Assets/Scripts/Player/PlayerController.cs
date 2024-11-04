@@ -176,6 +176,11 @@ public class PlayerController : MonoBehaviour
     {
         rigd.velocity = Vector3.zero;
     }
+
+    public void InitYVelocity()
+    {
+        rigd.velocity = new Vector3(rigd.velocity.x, 0f, rigd.velocity.z);
+    }
     #endregion
 
 

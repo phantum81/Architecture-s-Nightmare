@@ -12,7 +12,7 @@ public class SlopChecker : MonoBehaviour
     private float maxSlope;
 
     private RaycastHit slopeHit;
-    private LayerMask expectLayer = 1<<6 | 1<<2;
+    private LayerMask expectLayer = (1 << 6) | (1 << 2) | (1 << 8);
 
     public PlayerController pc;
 

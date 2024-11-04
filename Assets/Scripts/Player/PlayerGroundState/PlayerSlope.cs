@@ -23,6 +23,7 @@ public class PlayerSlope<T> : IState<T> where T : class
         if (_send is PlayerController playerCtr)
         {
             playerCtr.SetGravity(true);
+            //playerCtr.InitYVelocity();
         }
     }
 }

@@ -71,6 +71,9 @@ public class UiInteractionShower : MonoBehaviour
             case EInteractionType.Sit:
                 maintain = ConstBundle.INTERACTION_SIT;
                 break;
+            case EInteractionType.MiniGame:
+                maintain = ConstBundle.INTERACTION_MINIGAME;
+                break;
         }
         interactionText.text = maintain; 
     }

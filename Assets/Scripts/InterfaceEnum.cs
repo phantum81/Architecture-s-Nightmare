@@ -48,6 +48,14 @@ public interface IInteraction
 
 
 
+public enum EGameState
+{
+    None,
+    Playing,
+    MiniGameMimMapFirst,
+    MiniGameMimMapSecond,
+
+}
 
 
 
@@ -61,7 +69,10 @@ public enum EObjectType
     ExitDoor,
     SleepChair,
     SleepLapTop,
-
+    MimMiniGameFirst,
+    MimMiniGameSecond,
+    MiniGameChaneItFirst,
+    MiniGameChaneItSecond,
 }
 
 public enum EUserAction
@@ -73,6 +84,7 @@ public enum EUserAction
     Run,
     Jump,
     Interaction,
+    Click,
 
 
 }
@@ -80,7 +92,8 @@ public enum EUserAction
 public enum ECameraType
 {
     Fps,
-    TutorialCam,
+    MiniGameFirst,
+    MiniGameSecond,
 
 }
 
@@ -130,6 +143,7 @@ public enum EInteractionType
     Destroy,
     Look,
     Sit,
+    MiniGame,
 
 }
 

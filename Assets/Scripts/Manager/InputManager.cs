@@ -58,6 +58,7 @@ public class InputManager : MonoBehaviour
         _inputDic[EUserAction.Jump] = Input.GetKeyDown(KeyCode.Space);
         _inputDic[EUserAction.Run] = Input.GetKey(KeyCode.LeftShift);
         _inputDic[EUserAction.Interaction] = Input.GetKeyDown(KeyCode.F);
+        _inputDic[EUserAction.Click] = Input.GetKeyDown(KeyCode.Mouse0);
 
     }
     #endregion

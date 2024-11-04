@@ -12,6 +12,7 @@ public class NotDestroy : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {
@@ -20,7 +21,7 @@ public class NotDestroy : MonoBehaviour
     }
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+       
     }
 
 

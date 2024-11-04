@@ -27,7 +27,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         StateUpdate();
 
-        
+        if (GameManager.Instance.EgameState != EGameState.Playing) return;
 
 
         if (playerCtr.IsGround)

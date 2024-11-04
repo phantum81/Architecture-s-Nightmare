@@ -68,7 +68,7 @@ public class StepHeightChecker : MonoBehaviour
                
 
                 Debug.Log($"≥Ù¿Ã {stepHeight}");
-                //Vector3 targetPosition = new Vector3(_rigd.position.x, Mathf.Lerp(_rigd.position.y, _rigd.position.y + stepHeight, Time.deltaTime * time), _rigd.position.z);
+                Vector3 targetPosition = new Vector3(_rigd.position.x, Mathf.Lerp(_rigd.position.y, _rigd.position.y + stepHeight, Time.deltaTime * time), _rigd.position.z);
 
                 _rigd.MovePosition(new Vector3(_rigd.position.x, _rigd.position.y + stepHeight, _rigd.position.z));
                 //_rigd.MovePosition(targetPosition);

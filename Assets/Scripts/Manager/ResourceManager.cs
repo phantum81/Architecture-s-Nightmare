@@ -27,8 +27,8 @@ public class ResourceManager : MonoBehaviour
         }
     }
      
-    private Dictionary<EObjectType, Transform> _objectDic = new Dictionary<EObjectType, Transform>();
-    public Dictionary<EObjectType, Transform> ObjectDic => _objectDic;
+    private Dictionary<EObjectType, List<Transform>> _objectDic = new Dictionary<EObjectType, List<Transform>>();
+    public Dictionary<EObjectType, List<Transform>> ObjectDic => _objectDic;
 
     [Header("플레이어 대사 데이터"), SerializeField]
     private GamePlayerScriptsData _playerScriptsData;
@@ -54,11 +54,21 @@ public class ResourceManager : MonoBehaviour
             // Dictionary에 추가
             if (!_objectDic.ContainsKey(type))
             {
-                _objectDic[type] = transform;
+                List<Transform> list = new List<Transform>();
+                _objectDic[type] = list;
+                _objectDic[type].Add(transform);
             }
             else
             {
-                Debug.LogWarning($"Duplicate entry for {type}. Object already exists in the dictionary.");
+                if (!_objectDic[type].Contains(transform))
+                {
+                    _objectDic[type].Add(transform);
+                }
+                else
+                {
+                    Debug.LogWarning("리소스 오브젝트 딕셔너리 리스트내 중복");
+                }
+                
             }
         }
     }

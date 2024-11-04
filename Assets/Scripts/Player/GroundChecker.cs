@@ -6,7 +6,7 @@ public class GroundChecker : MonoBehaviour
 {
     private int groundLayer = 1 << 10;
 
-    private LayerMask expectLayer = (1 << 6)| 1<<2;
+    private LayerMask expectLayer = (1 << 6)| (1<<2) | (1<<8);
     private bool isGround = false;
     public bool IsGround => isGround;
 

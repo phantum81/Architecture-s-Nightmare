@@ -5,13 +5,16 @@ using UnityEngine;
 public class ConstBundle
 {
     public const string FPS_CAMERA_TAG = "FpsCamera";
-    public const string TUTORIAL_CAMERA_TAG = "TutorialCamera";
-
+    public const string MINIGAME_FIRST_CAMERA_TAG = "MiniGameFisrtCamera";
+    public const string MINIGAME_SECOND_CAMERA_TAG = "MiniGameSecondCamera";
 
     public const string SCENE_TUTORIAL = "TutorialScene";
     public const string SCENE_STUDIO = "StudioScene";
     public const string SCENE_FIRST = "1stScene";
+
     
+
+
 
     public const string INTERACTION_TAG = "Interaction";
 
@@ -21,4 +24,9 @@ public class ConstBundle
     public const string INTERACTION_DESTROY = "F:부수다";
     public const string INTERACTION_SIT = "F:앉다";
     public const string INTERACTION_PUSH = "F:밀다";
+    public const string INTERACTION_MINIGAME = "F:시작하다";
+
+
+
+    public const string MINIGAME_CHANGE_OBJECT = "ChangeIt";
 }
