@@ -6,19 +6,22 @@ public class RollObject : Item
 {
     private Rigidbody rigd;
 
+    [Header("∏ÿ√„ ∆«¥‹"), SerializeField]
+    private float stopThreshold = 0.01f;
     private Vector3 originPos;
     private Quaternion originRotate;
-
+    private bool isInteraction = false;
     private void Update()
     {
-        if(transform.localPosition.z < 0.8)
+        if (!rigd.isKinematic && !isInteraction)
         {
-            rigd.isKinematic = true;
-            rigd.velocity = Vector3.zero;
-            transform.position = originPos;
-            transform.rotation = originRotate;
-            
+            if (transform.localPosition.z < 0.8 || rigd.velocity.magnitude < stopThreshold)
+            {
+                ResetRollObject();
+
+            }
         }
+
     }
 
 
@@ -40,10 +43,14 @@ public class RollObject : Item
 
     }
     public override void OnInteraction()
-    {
-        
-        rigd.isKinematic = false;
-        
+    {        
+        if(!isInteraction)
+        {
+            rigd.isKinematic = false;
+            isInteraction = true;
+            Invoke("EndInteraction", 0.5f);
+        }
+
     }
 
 
@@ -53,7 +60,18 @@ public class RollObject : Item
     }
 
 
+    private void ResetRollObject()
+    {
+        rigd.velocity = Vector3.zero;
+        transform.position = originPos;
+        transform.rotation = originRotate;
+        rigd.isKinematic = true;
+        isInteraction = false;
+    }
 
 
-
+    private void EndInteraction()
+    {
+        isInteraction = false;
+    }
 }

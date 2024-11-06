@@ -107,6 +107,7 @@ public enum EEventType
     StudioEnter,
     TutorialCinema,
     FirstMapCinema,
+    MimMapCinema,
     StudioDecoInteraction,
     StudioToAnotherScene,
 

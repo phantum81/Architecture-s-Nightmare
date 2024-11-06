@@ -5,10 +5,6 @@ using UnityEngine;
 public class DestroySaboa : MonoBehaviour
 {
 
-    private void Start()
-    {
-        
-    }
 
 
 
@@ -24,9 +20,11 @@ public class DestroySaboa : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (EObjectType.RollObject == collision.transform.GetComponent<IObject>().GetObjectType())
+        if (EObjectType.RollObject == collision.transform.GetComponent<IObject>()?.GetObjectType())
         {
             OffSaboaKinematic();
+            EventBus.TriggerEventAction(EEventType.MimMapCinema);
+
         }
 
 
