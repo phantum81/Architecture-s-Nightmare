@@ -73,6 +73,8 @@ public enum EObjectType
     MimMiniGameSecond,
     MiniGameChaneItFirst,
     MiniGameChaneItSecond,
+    RollObject,
+
 }
 
 public enum EUserAction
@@ -143,6 +145,7 @@ public enum EInteractionType
     Destroy,
     Look,
     Sit,
+    Roll,
     MiniGame,
 
 }

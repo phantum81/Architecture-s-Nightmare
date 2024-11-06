@@ -58,13 +58,13 @@ public class CameraManager : MonoBehaviour
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         CinemachineVirtualCameraBase fpsCam = GameObject.FindGameObjectWithTag(ConstBundle.FPS_CAMERA_TAG).GetComponent<CinemachineVirtualCameraBase>();
         CinemachineVirtualCameraBase MiniGameFirst = GameObject.FindGameObjectWithTag(ConstBundle.MINIGAME_FIRST_CAMERA_TAG)?.GetComponent<CinemachineVirtualCameraBase>();
-        CinemachineVirtualCameraBase MiniGameSecond = GameObject.FindGameObjectWithTag(ConstBundle.FPS_CAMERA_TAG).GetComponent<CinemachineVirtualCameraBase>();
+        CinemachineVirtualCameraBase MiniGameSecond = GameObject.FindGameObjectWithTag(ConstBundle.MINIGAME_SECOND_CAMERA_TAG)?.GetComponent<CinemachineVirtualCameraBase>();
 
 
 
         AddCameraToDictionary(ECameraType.Fps, fpsCam);
         AddCameraToDictionary(ECameraType.MiniGameFirst, MiniGameFirst);
-        AddCameraToDictionary(ECameraType.MiniGameSecond, MiniGameFirst);
+        AddCameraToDictionary(ECameraType.MiniGameSecond, MiniGameSecond);
 
     }
 

@@ -15,7 +15,7 @@ public class MiniGameController : MonoBehaviour
     private quaternion originFirstRotate;
     private quaternion originSecondRotate;
 
-
+    private quaternion onMouseChangeItRotate;
 
     private List<Transform> changeItFirstObj;
     private List<Transform> changeItSecondObj;
@@ -42,8 +42,9 @@ public class MiniGameController : MonoBehaviour
 
         originFirstRotate = changeItFirstObj[0].rotation;
         originSecondRotate = changeItSecondObj[0].rotation;
+        onMouseChangeItRotate = changeItFirstObj[0].rotation;
 
-       
+
 
     }
 
@@ -94,7 +95,7 @@ public class MiniGameController : MonoBehaviour
             else if (hitPoint != Vector3.zero)
             {
                 _objList[0].position = hitPoint;
-                _objList[0].rotation = _originRotate;
+                _objList[0].rotation = onMouseChangeItRotate;
             }
             else
             {
@@ -124,7 +125,14 @@ public class MiniGameController : MonoBehaviour
         }
         else
         {
+            changeItSecondObj = new List<Transform>(ResourceManager.Instance.ObjectDic[EObjectType.MiniGameChaneItSecond]);
 
+            for (int i = 0; i < changeItSecondObj.Count; i++)
+            {
+                changeItSecondObj[i].gameObject.layer = 2;
+                changeItSecondObj[i].position = originSecondPos[i];
+                changeItSecondObj[i].rotation = originSecondRotate;
+            }
         }
         targetList.Clear();
 

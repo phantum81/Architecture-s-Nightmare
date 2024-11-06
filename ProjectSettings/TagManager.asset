@@ -9,6 +9,8 @@ TagManager:
   - MiniGameFisrtCamera
   - ChangeIt
   - Ignore
+  - TutorialCamera
+  - MiniGameSecondCamera
   layers:
   - Default
   - TransparentFX

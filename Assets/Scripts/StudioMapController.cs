@@ -27,10 +27,12 @@ public class StudioMapController : MonoBehaviour
 
     private void PlayTimeLineAsset(EGameStage _stage)
     {
-        Transform chair = ResourceManager.Instance.ObjectDic[EObjectType.SleepChair][0];
-        Transform laptop = ResourceManager.Instance.ObjectDic[EObjectType.SleepLapTop][0];
+        
+        //Transform laptop = ResourceManager.Instance.ObjectDic[EObjectType.SleepLapTop][0];
 
         
+        //SphereCollider laptopCol = chair?.GetComponent<Item>().InteractionCollider;
+
         switch (_stage)
         {
             case EGameStage.Tutorial:
@@ -39,7 +41,9 @@ public class StudioMapController : MonoBehaviour
                 break;
             case EGameStage.FirstMap:
                 firstMapDirecter.Play();
-                
+                Transform chair = ResourceManager.Instance.ObjectDic[EObjectType.SleepChair][0];
+                SphereCollider chairCol = chair?.GetComponent<Item>().InteractionCollider;
+                chairCol.enabled = false;
                 firstMapObject.SetActive(true);
                 break;
             case EGameStage.MinMap:

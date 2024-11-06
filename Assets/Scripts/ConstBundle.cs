@@ -25,7 +25,7 @@ public class ConstBundle
     public const string INTERACTION_SIT = "F:앉다";
     public const string INTERACTION_PUSH = "F:밀다";
     public const string INTERACTION_MINIGAME = "F:시작하다";
-
+    public const string INTERACTION_ROLL = "F:굴리다";
 
 
     public const string MINIGAME_CHANGE_OBJECT = "ChangeIt";

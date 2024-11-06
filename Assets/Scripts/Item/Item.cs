@@ -9,6 +9,9 @@ public class Item : MonoBehaviour, IObject, IInteraction
     protected EObjectType eObjectType;
 
     protected SphereCollider interactionCollider;
+
+    public SphereCollider InteractionCollider => interactionCollider;
+
     public virtual EObjectType GetObjectType()
     {
         return eObjectType;

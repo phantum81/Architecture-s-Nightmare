@@ -17,6 +17,7 @@ public class NotDestroy : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            
         }
     }
     void Start()

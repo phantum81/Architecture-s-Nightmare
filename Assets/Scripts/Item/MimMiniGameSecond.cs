@@ -19,9 +19,7 @@ public class MimMiniGameSecond : Item
     }
     public override void OnInteraction()
     {
-        //EventBus.TriggerEventAction(EEventType.StudioToAnotherScene, eObjectType);
-        //interactionCollider.enabled = false;
-
+        GameManager.Instance.SetGameState(EGameState.MiniGameMimMapSecond);
     }
 
 

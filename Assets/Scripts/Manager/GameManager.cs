@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
                     _instance = _go.GetComponent<GameManager>();
                 }
             }
+
             return _instance;
 
         }
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private EGameStage _eGameStage = EGameStage.Tutorial;
     public EGameStage EgameStage => _eGameStage;
 
