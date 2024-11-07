@@ -17,8 +17,8 @@ public class RollObject : Item
         {
             if (transform.localPosition.z < 0.8 || rigd.velocity.magnitude < stopThreshold)
             {
-                ResetRollObject();
-
+                
+                Invoke("ResetRollObject", 2f);
             }
         }
 

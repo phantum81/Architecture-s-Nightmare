@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using static UnityEngine.Rendering.DebugUI;
 
 public class CameraManager : MonoBehaviour
@@ -40,12 +41,15 @@ public class CameraManager : MonoBehaviour
                 break;
             case EGameState.Playing:
                 ChangeCamera(ECameraType.Fps);
+                SetProjectionOrthographic(false);
                 break;
             case EGameState.MiniGameMimMapFirst:
                 ChangeCamera(ECameraType.MiniGameFirst);
-                break;
+                SetProjectionOrthographic(false);
+                break;;
             case EGameState.MiniGameMimMapSecond:
                 ChangeCamera(ECameraType.MiniGameSecond);
+                SetProjectionOrthographic(true);
                 break;
         }
 
@@ -137,14 +141,20 @@ public class CameraManager : MonoBehaviour
             return (null, Vector3.zero);
     }
 
-
-    public void OnDrawGizmos()
+    private void SetProjectionOrthographic(bool _bol)
     {
-
-        Ray ray = cinemachineBrain.transform.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-
-
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+        cinemachineBrain.GetComponent<Camera>().orthographic =  _bol;
     }
+
+
+
+    //public void OnDrawGizmos()
+    //{
+
+    //    Ray ray = cinemachineBrain.transform.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+
+
+    //    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+    //}
 
 }
