@@ -169,8 +169,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
-            return;
+            //Destroy(gameObject);
+            //return;
         }
 
         _eGameState = EGameState.Playing;

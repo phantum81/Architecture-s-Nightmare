@@ -28,6 +28,8 @@ public class PlayerCollision : MonoBehaviour
         //}
         //else
         //    dir = Vector3.zero;
+
+
         if (collision.collider.gameObject.layer == 0)
         {
             // 충돌한 벽의 표면 노말을 가져옵니다.
@@ -56,11 +58,11 @@ public class PlayerCollision : MonoBehaviour
 
         if (other.tag == ConstBundle.INTERACTION_TAG)
         {
-            if (curCoroutine != null) // null이 아닐 경우에만 중지
+            if (curCoroutine != null) 
             {
                 StopCoroutine(curCoroutine);
                 EventBus.TriggerEventAction(EEventType.OffInteraction);
-                curCoroutine = null; // 중지 후 null로 초기화
+                curCoroutine = null; 
             }
         }
     }
@@ -80,7 +82,7 @@ public class PlayerCollision : MonoBehaviour
                 
                 float angle = Vector3.Angle(transform.forward, _col.transform.parent.position - transform.position);
                 Vector3 screenPoint = curCam.WorldToViewportPoint(_col.transform.parent.position);
-                bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+                bool isIn = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1 && _col.enabled;
 
                 if (isIn)
                 {
@@ -90,6 +92,7 @@ public class PlayerCollision : MonoBehaviour
                         EventBus.TriggerEventAction(EEventType.OnInteraction, obj.GetInteractionType());
                         EventBus.TriggerEventAction(EEventType.OnInteraction);
                         isInteracting = true;
+                        Debug.Log(obj);
 
                     }
                     if (inputMgr.InputDic[EUserAction.Interaction])
@@ -101,8 +104,14 @@ public class PlayerCollision : MonoBehaviour
                 {
                     if (isInteracting)
                     {
-                        EventBus.TriggerEventAction(EEventType.OffInteraction);
-                        isInteracting = false;
+
+                        if (curCoroutine != null)
+                        {
+                            EventBus.TriggerEventAction(EEventType.OffInteraction);
+                            isInteracting = false;
+                            StopCoroutine(curCoroutine);                            
+                            curCoroutine = null;
+                        }
                     }
                         
                 }

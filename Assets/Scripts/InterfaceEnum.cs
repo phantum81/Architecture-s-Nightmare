@@ -74,6 +74,9 @@ public enum EObjectType
     MiniGameChaneItFirst,
     MiniGameChaneItSecond,
     RollObject,
+    BrokenBuilding,
+    Portal,
+
 
 }
 
@@ -111,6 +114,8 @@ public enum EEventType
     StudioDecoInteraction,
     StudioToAnotherScene,
 
+    BrokeBuilding,
+    ReleaseBuilding,
 }
 
 public enum EPlayerState
@@ -148,6 +153,7 @@ public enum EInteractionType
     Sit,
     Roll,
     MiniGame,
+    Move,
 
 }
 
@@ -174,3 +180,12 @@ public enum EPlayerScriptsType
     StudioToMimMap,
 }
 
+
+
+public enum EMaxMapBuildingType
+{
+    West,
+    East,
+    North,
+    South,
+}

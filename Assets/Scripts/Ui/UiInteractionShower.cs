@@ -77,6 +77,9 @@ public class UiInteractionShower : MonoBehaviour
             case EInteractionType.Roll:
                 maintain = ConstBundle.INTERACTION_ROLL;
                 break;
+            case EInteractionType.Move:
+                maintain = ConstBundle.INTERACTION_PORTAL;
+                break;
         }
         interactionText.text = maintain; 
     }
