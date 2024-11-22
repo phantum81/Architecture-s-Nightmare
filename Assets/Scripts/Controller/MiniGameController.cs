@@ -89,9 +89,9 @@ public class MiniGameController : MonoBehaviour
                 {
                     targetList.Add(target);
                     _objList[0].gameObject.layer = 0;
-                    _objList.Remove(_objList[0]);
                     if(GameManager.Instance.EgameState == EGameState.MiniGameMimMapFirst)
                         _objList[0].parent = targetParent;
+                    _objList.Remove(_objList[0]);
                 }
 
             }

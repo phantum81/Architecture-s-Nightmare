@@ -20,6 +20,8 @@ public class SleepChair : Item
     }
     public override void OnInteraction()
     {
+        if(interactionCollider == null)
+            interactionCollider = transform.GetChild(0).GetComponent<SphereCollider>();
         EventBus.TriggerEventAction(EEventType.StudioToAnotherScene, eObjectType);
         
         interactionCollider.enabled= false;

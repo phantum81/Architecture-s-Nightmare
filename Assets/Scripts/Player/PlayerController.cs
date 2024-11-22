@@ -1,6 +1,7 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -78,7 +79,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
-       
+       if(Fsm<EPlayerGroundState, PlayerController >.Instance.CurState == EPlayerGroundState.Air)
+       {
+            AirGravity();
+       }
 
 
     }

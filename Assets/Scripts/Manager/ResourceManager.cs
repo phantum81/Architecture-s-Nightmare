@@ -34,7 +34,8 @@ public class ResourceManager : MonoBehaviour
     private GamePlayerScriptsData _playerScriptsData;
     public GamePlayerScriptsData PlayerScriptsData => _playerScriptsData;
 
-
+    private Transform mimPuzzle;
+    
     public void ResetDictionary()
     {
         _objectDic.Clear();
@@ -89,5 +90,15 @@ public class ResourceManager : MonoBehaviour
         return foundObjects;
     }
 
+
+
+    public void SetMimPuzzle(Transform _target)
+    {
+        mimPuzzle = _target;
+    }
+    public Transform GetMimPuzzle()
+    {
+        return mimPuzzle;
+    }
 
 }

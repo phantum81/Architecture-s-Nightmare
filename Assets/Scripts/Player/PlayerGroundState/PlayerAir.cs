@@ -14,7 +14,7 @@ public class PlayerAir<T> : IState<T> where T : class
     {
         if (_send is PlayerController playerCtr)
         {
-            playerCtr.AirGravity();
+            //playerCtr.AirGravity();
             playerCtr.JumpMove(playerCtr.InputDir, playerCtr.AirSpeed);
             playerCtr.Rotate();
             

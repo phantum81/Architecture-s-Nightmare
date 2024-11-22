@@ -11,6 +11,8 @@ public class PlayerCollision : MonoBehaviour
     private InputManager inputMgr;
     private Coroutine curCoroutine;
     private CameraManager cameraMgr;
+
+    private Transform preCollider;
     private void Start()
     {
         inputMgr = GameManager.Instance.InputMgr;
@@ -44,9 +46,19 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.tag == ConstBundle.INTERACTION_TAG)
         {
+            if(curCoroutine!= null && preCollider != other.transform)
+            {
+                StopCoroutine(curCoroutine);
+                EventBus.TriggerEventAction(EEventType.OffInteraction);
+                curCoroutine = null;
+            }
+
+
+
             if (curCoroutine == null)
             {
                 curCoroutine = StartCoroutine(Interacting(other));
+                preCollider = other.transform;
             }
            
         }
@@ -72,7 +84,7 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator Interacting(Collider _col)
     {
         IInteraction obj = _col.transform.parent.GetComponent<IInteraction>();
-        bool isInteracting = false;
+        
         Camera curCam = cameraMgr.CinemachineBrain.OutputCamera;
         if (obj != null)
         {
@@ -86,34 +98,26 @@ public class PlayerCollision : MonoBehaviour
 
                 if (isIn)
                 {
-                    
-                    if (!isInteracting)
-                    {
-                        EventBus.TriggerEventAction(EEventType.OnInteraction, obj.GetInteractionType());
-                        EventBus.TriggerEventAction(EEventType.OnInteraction);
-                        isInteracting = true;
-                        Debug.Log(obj);
 
-                    }
+                    EventBus.TriggerEventAction(EEventType.OnInteraction, obj.GetInteractionType());
+                    EventBus.TriggerEventAction(EEventType.OnInteraction);
+
+                    
                     if (inputMgr.InputDic[EUserAction.Interaction])
                     {
+                       
                         obj.OnInteraction();
                     }
                 }
                 else
                 {
-                    if (isInteracting)
+                    if (curCoroutine != null)
                     {
-
-                        if (curCoroutine != null)
-                        {
-                            EventBus.TriggerEventAction(EEventType.OffInteraction);
-                            isInteracting = false;
-                            StopCoroutine(curCoroutine);                            
-                            curCoroutine = null;
-                        }
-                    }
+                        EventBus.TriggerEventAction(EEventType.OffInteraction);
                         
+
+                    }
+
                 }
 
 

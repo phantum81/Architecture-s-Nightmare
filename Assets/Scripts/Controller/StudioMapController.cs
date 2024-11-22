@@ -52,7 +52,9 @@ public class StudioMapController : MonoBehaviour
                 minMapObject.SetActive(true);
                 break;
             case EGameStage.MaxMap:
-
+                firstMapObject.SetActive(true);
+                minMapObject.SetActive(true);
+                maxMapObject.SetActive(true);
                 break;
 
         }
