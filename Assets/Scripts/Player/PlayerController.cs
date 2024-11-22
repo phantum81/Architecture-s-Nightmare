@@ -133,11 +133,13 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalVelocity = new Vector3(rigd.velocity.x, 0, rigd.velocity.z);
         float verticalVelocity = rigd.velocity.y;
 
-        Vector3 velocity = rigd.velocity;
-        if (velocity.magnitude > runSpeed)
+        
+        if (horizontalVelocity.magnitude > runSpeed)
         {
-            rigd.velocity = velocity.normalized * runSpeed;
+            horizontalVelocity = horizontalVelocity.normalized * runSpeed;
         }
+
+        
         rigd.velocity = horizontalVelocity + Vector3.up * verticalVelocity;
     }
 
