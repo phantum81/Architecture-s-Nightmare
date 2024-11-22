@@ -77,6 +77,9 @@ public enum EObjectType
     RollObject,
     BrokenBuilding,
     Portal,
+    Puzzle,
+    BuildingHintMap,
+    BuildingMap,
 
 
 
@@ -120,6 +123,7 @@ public enum EEventType
     BrokeBuilding,
     ReleaseBuilding,
     ShakeFpsCamera,
+    EndMapSetting,
 }
 
 public enum EPlayerState

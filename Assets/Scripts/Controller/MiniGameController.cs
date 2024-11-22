@@ -22,7 +22,8 @@ public class MiniGameController : MonoBehaviour
 
 
     private List<Transform> targetList = new List<Transform>();
-
+    [Header("이동 타겟 부모"),SerializeField]
+    private Transform targetParent;
 
     void Start()
     {
@@ -89,6 +90,8 @@ public class MiniGameController : MonoBehaviour
                     targetList.Add(target);
                     _objList[0].gameObject.layer = 0;
                     _objList.Remove(_objList[0]);
+                    if(GameManager.Instance.EgameState == EGameState.MiniGameMimMapFirst)
+                        _objList[0].parent = targetParent;
                 }
 
             }
@@ -120,6 +123,7 @@ public class MiniGameController : MonoBehaviour
                 changeItFirstObj[i].gameObject.layer = 2;
                 changeItFirstObj[i].position = originFirstPos[i];
                 changeItFirstObj[i].rotation = originFirstRotate;
+                changeItFirstObj[i].parent = null;
             }
             
         }
@@ -137,5 +141,11 @@ public class MiniGameController : MonoBehaviour
         targetList.Clear();
 
 
+    }
+
+
+    public void PuzzleSetActive(bool _active)
+    {
+        targetParent.gameObject.SetActive(_active);
     }
 }

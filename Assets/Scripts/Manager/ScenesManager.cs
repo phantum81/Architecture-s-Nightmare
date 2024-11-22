@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-
+    private Transform mimPuzzle;
 
     public void OnLoadScene(string _name)
     {
@@ -44,7 +44,30 @@ public class ScenesManager : MonoBehaviour
             EventBus.TriggerEventAction(EEventType.StudioEnter, GameManager.Instance.EgameStage);
             GameManager.Instance.SetGameStage();
         }
+        if (SceneManager.GetActiveScene().name == ConstBundle.SCENE_MIM)
+        {
+            mimPuzzle = ResourceManager.Instance.ObjectDic[EObjectType.Puzzle][0];
+        }
+        if (SceneManager.GetActiveScene().name == ConstBundle.SCENE_MAX)
+        {
+            
 
+        }
+        if (SceneManager.GetActiveScene().name == ConstBundle.SCENE_END)
+        {
+            Transform building = ResourceManager.Instance.ObjectDic[EObjectType.BuildingMap][0];
+            Transform hint = ResourceManager.Instance.ObjectDic[EObjectType.BuildingHintMap][0];
+
+            mimPuzzle.gameObject.SetActive(true);;
+            hint.gameObject.SetActive(true);
+            building.gameObject.SetActive(true);
+
+
+            EventBus.TriggerEventAction(EEventType.EndMapSetting, new Transform[3] {mimPuzzle,hint, building });
+
+
+
+        }
 
 
     }

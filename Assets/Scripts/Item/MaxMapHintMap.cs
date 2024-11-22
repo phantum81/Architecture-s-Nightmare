@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameChangeIt : Item
+public class MaxMapHintMap : Item
 {
-
     public override void Init()
     {
-       
+        eObjectType = EObjectType.BuildingHintMap;
+        transform.parent = GameManager.Instance.transform;
+
     }
 
 
@@ -21,7 +22,4 @@ public class MiniGameChangeIt : Item
     {
         return transform;
     }
-
-
-
 }

@@ -8,6 +8,8 @@ public class MaxMapController : MonoBehaviour
 {
     [Header("힌트 맵"), SerializeField]
     private Transform hintMap;
+
+
     [Header("부서지는 건물 위치"), SerializeField]
     private List<Transform> brokenSpotList;
     [Header("부서지는 건물 프리펩"), SerializeField]
@@ -151,7 +153,7 @@ public class MaxMapController : MonoBehaviour
         }
 
         buildingParent.gameObject.SetActive(false);
-        hintMap.gameObject.SetActive(false);
+        //hintMap.gameObject.SetActive(false);
 
     }
 
@@ -161,4 +163,10 @@ public class MaxMapController : MonoBehaviour
     {
         EventBus.TriggerEventAction(EEventType.ShakeFpsCamera, shakeImpulseSource);
     }
+
+    public void SetBuilding()
+    {
+        buildingParent.gameObject.SetActive(true);
+    }
+
 }

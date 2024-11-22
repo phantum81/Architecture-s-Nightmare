@@ -11,8 +11,11 @@ public class ConstBundle
     public const string SCENE_TUTORIAL = "TutorialScene";
     public const string SCENE_STUDIO = "StudioScene";
     public const string SCENE_FIRST = "1stScene";
+    public const string SCENE_MIM = "2ndSmallScene";
+    public const string SCENE_MAX = "3rdMaxScene";
+    public const string SCENE_END = "EndScene";
 
-    
+
 
 
 

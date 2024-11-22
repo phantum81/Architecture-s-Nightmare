@@ -6,11 +6,11 @@ public class MimMiniGameExpain : Item
 {
     public override EObjectType GetObjectType()
     {
-        return base.GetObjectType();
+        return eObjectType;
     }
     public override Transform GetTransform()
     {
-        return base.GetTransform();
+        return transform;
     }
     public override void Init()
     {
