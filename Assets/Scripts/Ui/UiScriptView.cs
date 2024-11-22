@@ -62,7 +62,10 @@ public class UiScriptView : MonoBehaviour, IScriptView
     {
         present.CinemaScripts(EPlayerScriptsType.StudioToMimMap);
     }
-
+    public void CinemaStudioToMaxMapScripts()
+    {
+        present.CinemaScripts(EPlayerScriptsType.StudioToMaxMap);
+    }
 
     #endregion
 
@@ -71,6 +74,7 @@ public class UiScriptView : MonoBehaviour, IScriptView
     {
         EventBus.SubscribeAction<EObjectType>(EEventType.StudioDecoInteraction, present.OnScripts);
         EventBus.SubscribeAction(EEventType.OffInteraction, present.SetOffScriptPanel);
+        
        
     }
 

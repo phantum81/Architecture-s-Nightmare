@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,8 @@ using UnityEngine.Pool;
 
 public class MaxMapController : MonoBehaviour
 {
-    /// <summary>
-    /// 동 북 서 남
-    /// </summary>
+    [Header("힌트 맵"), SerializeField]
+    private Transform hintMap;
     [Header("부서지는 건물 위치"), SerializeField]
     private List<Transform> brokenSpotList;
     [Header("부서지는 건물 프리펩"), SerializeField]
@@ -21,7 +21,17 @@ public class MaxMapController : MonoBehaviour
 
     [Header("플레이어 위치더미"), SerializeField]
     private Transform playerDummy;
-    
+
+    [Header("디졸브 머터리얼"), SerializeField]
+    private List<Material> materialList ;
+
+    [Header("지진 임펄스소스"), SerializeField]
+    private CinemachineImpulseSource shakeImpulseSource;
+
+
+    [Header("건물 부모"), SerializeField]
+    private Transform buildingParent;
+
     private void Awake()
     {
         
@@ -41,11 +51,17 @@ public class MaxMapController : MonoBehaviour
                 defaultCapacity: 10,
                 maxSize: 20
             ) ;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if(Input.GetKeyDown(KeyCode.L))
+        //{
+        //    StartCoroutine(DissolveMaxMap());
+        //}
         PlayerTransformHint();
     }
 
@@ -64,37 +80,8 @@ public class MaxMapController : MonoBehaviour
         {
             for (int j = 0; j < brokenSpotList[i].childCount; j++)
             {
-                Instantiate(brokenBuildingPrefab, brokenSpotList[i].GetChild(j).position, rotations[i]);
+                Instantiate(brokenBuildingPrefab, brokenSpotList[i].GetChild(j).position, rotations[i], buildingParent);
             }
-        }
-    }
-    private IEnumerator CoSetBrokenBuilding()
-    {
-        Quaternion[] rotations =
-        {
-        Quaternion.Euler(-90f, 0f, 0f),
-        Quaternion.Euler(-90f, 0f, -90f),
-        Quaternion.Euler(-90f, 0f, 180f),
-        Quaternion.Euler(-90f, 0f, 90f)
-    };
-
-        for (int i = 0; i < brokenSpotList.Count; i++)
-        {
-            for (int j = 0; j < brokenSpotList[i].childCount; j++)
-            {
-                Instantiate(brokenBuildingPrefab, brokenSpotList[i].GetChild(j).position, rotations[i]);
-                if(i == 1)
-                {
-                    Debug.Log("1");
-                }
-                if ((i * brokenSpotList[i].childCount + j) % 10 == 0)  // 10개 생성 후 한 프레임 쉬기
-                {
-                    yield return null;
-
-                }
-                yield return null;
-            }
-           
         }
     }
 
@@ -126,16 +113,52 @@ public class MaxMapController : MonoBehaviour
         wreckPool.Release(_wreck);
     }
 
-
+    public void DissolveMap()
+    {
+        StartCoroutine(DissolveMaxMap());
+    }
 
     public void OnEnable()
     {
         EventBus.SubscribeAction<Vector3>(EEventType.BrokeBuilding, SpawnWreck);
         EventBus.SubscribeAction<WreckObject>(EEventType.ReleaseBuilding, DeSpawnWreck);
+        
     }
     public void OnDisable()
     {
         EventBus.UnsubscribeAction<Vector3>(EEventType.BrokeBuilding, SpawnWreck);
-        EventBus.SubscribeAction<WreckObject>(EEventType.ReleaseBuilding, DeSpawnWreck);
+        EventBus.UnsubscribeAction<WreckObject>(EEventType.ReleaseBuilding, DeSpawnWreck);
+        
+    }
+
+
+
+    private IEnumerator DissolveMaxMap()
+    {
+        float value = 0f;
+        while(value < 1f)
+        {
+            value += Time.deltaTime / 3f;
+            foreach(var m in materialList)
+            {
+                m.SetFloat("_Dissolve", value);
+            }
+            yield return null;
+        }
+        foreach (var m in materialList)
+        {
+            m.SetFloat("_Dissolve", 0f);
+        }
+
+        buildingParent.gameObject.SetActive(false);
+        hintMap.gameObject.SetActive(false);
+
+    }
+
+
+
+    public void ShakeFpsCamera()
+    {
+        EventBus.TriggerEventAction(EEventType.ShakeFpsCamera, shakeImpulseSource);
     }
 }

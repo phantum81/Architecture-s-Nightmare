@@ -10,12 +10,7 @@ public class WreckObject : MonoBehaviour
     List<Quaternion> originRotList = new List<Quaternion>();
     void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            childList.Add(transform.GetChild(i).transform);
-            originPosList.Add(transform.GetChild(i).position);
-            originRotList.Add(transform.GetChild(i).rotation);
-        }
+
     }
 
     // Update is called once per frame
@@ -27,7 +22,15 @@ public class WreckObject : MonoBehaviour
     public void SetOn()
     {
         gameObject.SetActive(true);
-        for(int i =0; i< childList.Count; i++)
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            childList.Add(transform.GetChild(i).transform);
+            originPosList.Add(transform.GetChild(i).position);
+            originRotList.Add(transform.GetChild(i).rotation);
+        }
+
+        for (int i =0; i< childList.Count; i++)
         {
             childList[i].transform.position = originPosList[i];
             childList[i].transform.rotation = originRotList[i];
@@ -43,14 +46,17 @@ public class WreckObject : MonoBehaviour
 
     private IEnumerator FadeOutObject()
     {
+
         yield return new WaitForSeconds(4f);
-        for(int i =0; i< childList.Count; i++)
+
+        for (int i = 0; i < childList.Count; i++)
         {
             Rigidbody rigd = childList[i].GetComponent<Rigidbody>();
             rigd.Sleep();
-            rigd.useGravity= false;
-            childList[i].GetComponent<Collider>().enabled= false;
+            rigd.useGravity = false;
+            childList[i].GetComponent<Collider>().enabled = false;
         }
+
         while (transform.position.y > -1f)
         {
 

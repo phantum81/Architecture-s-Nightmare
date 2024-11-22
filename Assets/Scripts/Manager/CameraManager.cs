@@ -22,7 +22,6 @@ public class CameraManager : MonoBehaviour
 
 
 
-
     void Start()
     {
         _curCamera = CameraDic[ECameraType.Fps];
@@ -69,6 +68,8 @@ public class CameraManager : MonoBehaviour
         AddCameraToDictionary(ECameraType.Fps, fpsCam);
         AddCameraToDictionary(ECameraType.MiniGameFirst, MiniGameFirst);
         AddCameraToDictionary(ECameraType.MiniGameSecond, MiniGameSecond);
+
+        
 
     }
 
@@ -156,5 +157,21 @@ public class CameraManager : MonoBehaviour
 
     //    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
     //}
+
+    public void FpsCameraShake(CinemachineImpulseSource _source)
+    {
+        _source.GenerateImpulse();
+    }
+
+
+    private void OnEnable()
+    {
+        EventBus.SubscribeAction<CinemachineImpulseSource>(EEventType.ShakeFpsCamera, FpsCameraShake);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.UnsubscribeAction<CinemachineImpulseSource>(EEventType.ShakeFpsCamera, FpsCameraShake);
+    }
 
 }

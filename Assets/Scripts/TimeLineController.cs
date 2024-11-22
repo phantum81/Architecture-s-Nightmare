@@ -9,8 +9,10 @@ public class TimeLineController : MonoBehaviour
     private PlayableDirector tutorialDirecter;
     [Header("첫째맵 시네마"), SerializeField]
     private PlayableDirector firstMapDirecter;
-    [Header("첫째맵 시네마"), SerializeField]
+    [Header("작아지는 맵 시네마"), SerializeField]
     private PlayableDirector mimMapDirecter;
+    [Header("커지는 맵 시네마"), SerializeField]
+    private PlayableDirector maxMapDirecter;
     [Header("스튜디오에서 첫째맵 시네마"), SerializeField]
     private PlayableDirector hubToFirstMapDirecter;
     [Header("스튜디오에서 내가 작아지는 방 시네마"), SerializeField]
@@ -22,6 +24,7 @@ public class TimeLineController : MonoBehaviour
         EventBus.SubscribeAction(EEventType.TutorialCinema, PlayTutorial);
         EventBus.SubscribeAction(EEventType.FirstMapCinema, PlayFirstMap);
         EventBus.SubscribeAction(EEventType.MimMapCinema, PlayMimMap);
+        EventBus.SubscribeAction(EEventType.MaxMapCinema, PlayMaxMap);
         EventBus.SubscribeAction<EObjectType>(EEventType.StudioToAnotherScene, PlayStudioToAnotherScene);
 
     }
@@ -29,8 +32,9 @@ public class TimeLineController : MonoBehaviour
     private void OnDisable()
     {
         EventBus.UnsubscribeAction(EEventType.TutorialCinema, PlayTutorial);
-        EventBus.SubscribeAction(EEventType.FirstMapCinema, PlayFirstMap);
+        EventBus.UnsubscribeAction(EEventType.FirstMapCinema, PlayFirstMap);
         EventBus.UnsubscribeAction(EEventType.MimMapCinema, PlayMimMap);
+        EventBus.UnsubscribeAction(EEventType.MaxMapCinema, PlayMaxMap);
         EventBus.UnsubscribeAction<EObjectType>(EEventType.StudioToAnotherScene, PlayStudioToAnotherScene);
 
     }
@@ -49,7 +53,10 @@ public class TimeLineController : MonoBehaviour
     {
         mimMapDirecter.Play();
     }
-
+    private void PlayMaxMap()
+    {
+        maxMapDirecter.Play();
+    }
 
 
     private void PlayStudioToAnotherScene(EObjectType _type)
@@ -61,6 +68,9 @@ public class TimeLineController : MonoBehaviour
                 break;
             case EObjectType.SleepLapTop:
                 hubToMinMapDirecter.Play();
+                break;
+            case EObjectType.SleepBed:
+                hubToMaxMapDirecter.Play();
                 break;
 
         }

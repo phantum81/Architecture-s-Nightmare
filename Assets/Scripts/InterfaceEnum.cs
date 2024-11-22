@@ -69,6 +69,7 @@ public enum EObjectType
     ExitDoor,
     SleepChair,
     SleepLapTop,
+    SleepBed,
     MimMiniGameFirst,
     MimMiniGameSecond,
     MiniGameChaneItFirst,
@@ -76,6 +77,7 @@ public enum EObjectType
     RollObject,
     BrokenBuilding,
     Portal,
+
 
 
 }
@@ -111,11 +113,13 @@ public enum EEventType
     TutorialCinema,
     FirstMapCinema,
     MimMapCinema,
+    MaxMapCinema,
     StudioDecoInteraction,
     StudioToAnotherScene,
 
     BrokeBuilding,
     ReleaseBuilding,
+    ShakeFpsCamera,
 }
 
 public enum EPlayerState
@@ -154,6 +158,7 @@ public enum EInteractionType
     Roll,
     MiniGame,
     Move,
+    Lean,
 
 }
 
@@ -178,6 +183,7 @@ public enum EPlayerScriptsType
     StudioInteractionSaboa,
     StudioToFirstMap,
     StudioToMimMap,
+    StudioToMaxMap,
 }
 
 
