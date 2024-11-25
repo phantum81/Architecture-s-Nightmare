@@ -80,6 +80,7 @@ public enum EObjectType
     Puzzle,
     BuildingHintMap,
     BuildingMap,
+    Clock
 
 
 
@@ -163,6 +164,7 @@ public enum EInteractionType
     MiniGame,
     Move,
     Lean,
+    Use,
 
 }
 

@@ -31,6 +31,7 @@ public class ConstBundle
     public const string INTERACTION_ROLL = "F:굴리다";
     public const string INTERACTION_PORTAL = "F:이동하다";
     public const string INTERACTION_LEAN = "F:눕다";
+    public const string INTERACTION_USE = "F:사용하다";
 
     public const string MINIGAME_CHANGE_OBJECT = "ChangeIt";
 }

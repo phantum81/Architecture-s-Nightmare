@@ -22,11 +22,21 @@ public class DestroySaboa : MonoBehaviour
     {
         if (EObjectType.RollObject == collision.transform.GetComponent<IObject>()?.GetObjectType())
         {
-            OffSaboaKinematic();
+            //OffSaboaKinematic();
             EventBus.TriggerEventAction(EEventType.MimMapCinema);
 
         }
 
 
+    }
+
+    private void OnDisable()
+    {
+        EventBus.UnsubscribeAction(EEventType.MimMapCinema, OffSaboaKinematic);
+    }
+
+    private void OnEnable()
+    {
+        EventBus.SubscribeAction(EEventType.MimMapCinema, OffSaboaKinematic);
     }
 }

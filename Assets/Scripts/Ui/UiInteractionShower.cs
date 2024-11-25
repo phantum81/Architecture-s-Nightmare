@@ -83,6 +83,9 @@ public class UiInteractionShower : MonoBehaviour
             case EInteractionType.Lean:
                 maintain = ConstBundle.INTERACTION_LEAN;
                 break;
+            case EInteractionType.Use:
+                maintain = ConstBundle.INTERACTION_USE;
+                break;
         }
         interactionText.text = maintain; 
     }
